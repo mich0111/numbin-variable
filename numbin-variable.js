@@ -1,15 +1,14 @@
 <div style="padding:0px; margin:2px 2px; width:85px; height:85px;" class="cmd #history# container-fluid tooltips cmd-widget" data-type="info" data-version="#version#" data-eqLogic_id="#eqLogic_id#" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#">
  	<img class="background#uid#"/>
  	<img class="banner#uid#"/>
-	<img class="icon#uid#" style="transform:translate(-50%,-50%);" />
-	<div class="txtban#uid#"></div>
-	<div class="colban#uid#"></div>
+	<img class="icon#uid#" style="transform:translate(-50%,-50%);"/>
+	<div class="txtban#uid#"/>
 	<div class="error#uid#"/>
  
 	<script>
-		jeedom.cmd.update['#id#'] = function(_options){
+		jeedom.cmd.update['#id#'] = function(_options) {
 			// Récupération de srcState
-			var srcState = _options.display_value;	// Valeur de l'info numérique
+			var srcState = _options.display_value;	// Valeur de l'info binaire
 
 			// Récupération des valeurs des paramètres du widget
  			var fldIcon = ('#folder#'!='#'+'folder#') ? '#folder#' : "";
@@ -25,34 +24,32 @@
 			var srcColBanOff = ('#colbanoff#'!='#'+'colbanoff#') ? '#colbanoff#': "";
 													// Couleur du bandeau OFF (obligatoire)
 			var srcTheme = ('#theme#'!='#'+'theme#') ? '#theme#': "";
-													// Thème du background s'il y a lieu (optionnel)
+													// Thème du background (optionnel)
 
 			var fldBkg = 'data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/fond/';
 													// Dossier des images de background
-			var srcMode = "light"					// Mode du background (dark ou light)
+			var srcMode = "light";					// Mode du background (dark ou light)
 			var srcColBanner = "";					// Couleur du bandeau
-			var srcValBanner = ""					// Texte du bandeau
-			var srcTxtBanner = "black"				// Couleur des caractères du bandeau
+			var srcTxtBanner = "";					// Texte du bandeau
+			var srcColTxtBanner = "black";			// Couleur des caractères du bandeau
 			var srcMode = "light";					// Mode du background (dark ou light)
 			var srcErrorCode = "";					// Nom du paramètre en erreur s'il y a lieu
-			var	srcTemp = 0;						// Variable temporaire
 		
 			// Validation des paramètres
-			} else if (fldIcon == null || fldIcon == "") {
+			if (fldIcon == null || fldIcon == "") {
 				srcErrorCode = "folder";
 			} else if (srcIcon == null || srcIcon == "") {
 				srcErrorCode = "icon";
-			} else if (srcTxtBanOn == null || srcTxtBanOn == "" ) {
+			} else if (srcTxtBanOn == null || srcTxtBanOn == "") {
 				srcErrorCode = "txtbanon";
-			} else if (srcColBanOn == null || srcColBanOn == "" ) {
+			} else if (srcColBanOn == null || srcColBanOn == "") {
 				srcErrorCode = "colbanon";
-			} else if (srcTxtBanOff == null || srcTxtBanOff == "" ) {
+			} else if (srcTxtBanOff == null || srcTxtBanOff == "") {
 				srcErrorCode = "txtbanoff";
-			} else if (srcColBanOff == null || srcColBanOff == "" ) {
+			} else if (srcColBanOff == null || srcColBanOff == "") {
 				srcErrorCode = "colbanoff";
 			}
 			
-
 			if (srcErrorCode != "") {
 				srcIcon = "error";
 			} else {
@@ -62,49 +59,49 @@
 				// Initialisation de la couleur du bandeau
 				if (srcState == 0) {
 					srcColBanner = srcColBanOff;
-					srcValBanner = srcTxtBanOff; 
+					srcTxtBanner = srcTxtBanOff; 
 				} else {
-					srcValBanner = srcColBanOn;
-					srcValBanner = srcTxtBanOn; 
+					srcColBanner = srcColBanOn;
+					srcTxtBanner = srcTxtBanOn; 
 				}
-	
+
 				// Calcul de la couleur des caractères de la valeur de la commande et du bandeau
-				switch (srcValBanner) {
+				switch (srcColBanner) {
 					case "aqua":
-						srcTxtBanner = "black"
+						srcColTxtBanner = "black";
 						break;
 					case "blue":
-						srcTxtBanner = "white"
+						srcColTxtBanner = "white";
 						break;
 					case "lime":
-						srcTxtBanner = "white"
+						srcColTxtBanner = "white";
 						break;
 					case "yellow":
-						srcTxtBanner = "black"
+						srcColTxtBanner = "black";
 						break;
 					case "lightsalmon":
-						srcTxtBanner = "black"
+						srcColTxtBanner = "black";
 						break;
 					case "orange":
-						srcTxtBanner = "black"
+						srcColTxtBanner = "black";
 						break;
 					case "darkorange":
-						srcTxtBanner = "white"
+						srcColTxtBanner = "white";
 						break;
 					case "red":
-						srcTxtBanner = "white"
+						srcColTxtBanner = "white";
 						break;
 					case "darkred":
-						srcTxtBanner = "white"
+						srcColTxtBanner = "white";
 						break;
 					case "black":
-						srcTxtBanner = "white"
+						srcColTxtBanner = "white";
 						break;
 					case "gray":
-						srcTxtBanner = "white"
+						srcColTxtBanner = "white";
 						break;
 					defaut:
-						srcErrorCode = "? colban ?";
+						srcErrorCode = "?colban?";
 						break;
 				}
 			}
@@ -127,17 +124,17 @@
 				$('.error#uid#').empty().text(srcErrorCode);
 			} else {
 				// Affichage des textes
-				$('.txtban#uid#').css('color',srcTxtBanner);
-				$('.txtban#id#').empty().text(srcValBanner);
+				$('.txtban#uid#').css('color',srcColTxtBanner);
+				$('.txtban#id#').empty().text(srcTxtBanner);
 				
 				//Affichage du background, du bandeau et du nom de la commande
 				if (srcTheme != "") {
 					srcTheme = srcTheme + '_';
 				}
-				
+
 				$('.background#uid#').empty().attr("src", fldBkg + 'fo_bkg_' + srcTheme + srcMode + '.png');
-				$('.banner#uid#').empty().attr("src", fldBkg + 'fo_banner_' + srcValBanner + '.png');
-				$('.icon#uid#').empty().attr('src', fldIcon + srcIcon + srcIconID + '.png');
+				$('.banner#uid#').empty().attr("src", fldBkg + 'fo_banner_' + srcColBanner + '.png');
+				$('.icon#uid#').empty().attr('src', fldIcon + srcIcon + '.png');
 			}
 
 			$('.cmd[data-cmd_uid=#uid#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate);
@@ -146,6 +143,17 @@
 	</script>
 
 	<style>
+	div.error#uid# {
+			font-size:1em;
+			font-weight:bold;
+			position:absolute;
+			vertical-align:middle;
+			top:82%;
+			left:0%;
+			width:85px;
+			height:85px;
+			z-index:4;
+		}		
 		div.txtban#uid# {
 			font-size:1em;
 			font-weight:bold;
@@ -157,35 +165,14 @@
 			height:85px;
 			z-index:4;
 		}
-		div.error#uid# {
-			font-size:1em;
-			font-weight:bold;
+		img.icon#uid# {
 			position:absolute;
-			vertical-align:middle;
-			top:82%;
-			left:0%;
-			width:85px;
-			height:85px;
-			z-index:4;
-		}		
-		div.value#uid# {
-			font-size:1.2em;
-			font-weight:bold;
-			position:absolute;
-			vertical-align:middle;
-			top:2%;
-			width:85px;
-			height:85px;
-			z-index:4;
-			letter-spacing:0px;
-		}
-		img.background#uid# {
-			position:absolute;
-			top:0%;
-			left:0%;
-			width:85px;
-			height:85px;
-			z-index:1;
+			margin:0;
+			top:47%;
+			left:52%;
+			max-height:50px;
+			max-width:50px;
+			z-index:2;
 		}
 		img.banner#uid# {
 			position:absolute;
@@ -195,14 +182,13 @@
 			height:85px;
 			z-index:2;
 		}
-		img.icon#uid# {
+		img.background#uid# {
 			position:absolute;
-			margin:0;
-			top:47%;
-			left:52%;
-			max-height:50px;
-			max-width:50px;
-			z-index:2;
+			top:0%;
+			left:0%;
+			width:85px;
+			height:85px;
+			z-index:1;
 		}
 	</style>
 </div>
