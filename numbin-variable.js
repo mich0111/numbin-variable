@@ -2,9 +2,8 @@
  	<img class="background#uid#"/>
  	<img class="banner#uid#"/>
 	<img class="icon#uid#" style="transform:translate(-50%,-50%);" />
-	<div class="cmdname#uid#">#name_display#</div>
-	<div class="value#uid#"style=""></div>
-	<div class="unite#uid#">#unite#</div>
+	<div class="txtban#uid#"></div>
+	<div class="colban#uid#"></div>
 	<div class="error#uid#"/>
  
 	<script>
@@ -13,174 +12,100 @@
 			var srcState = _options.display_value;	// Valeur de l'info numérique
 
 			// Récupération des valeurs des paramètres du widget
-			var srcNumType = "#numtype#";			// Type de valeur à représenter (closed, opened, single) (obligatoire)
  			var fldIcon = ('#folder#'!='#'+'folder#') ? '#folder#' : "";
 													// Dossier de l'image à superposer (obligatoire)
  			var srcIcon = ('#icon#'!='#'+'icon#') ? '#icon#' : "";
 													// Image à superposer (obligatoire)
+			var srcTxtBanOn = ('#txtbanon#'!='#'+'txtbanon#') ? '#txtbanon#': "";
+													// Texte du bandeau ON (obligatoire)
+			var srcTxtBanOff = ('#txtbanoff#'!='#'+'txtbanoff#') ? '#txtbanoff#': "";
+													// Texte du bandeau OFF (obligatoire)
+			var srcColBanOn = ('#colbanon#'!='#'+'colbanon#') ? '#colbanon#': "";
+													// Couleur du bandeau ON (obligatoire)
+			var srcColBanOff = ('#colbanoff#'!='#'+'colbanoff#') ? '#colbanoff#': "";
+													// Couleur du bandeau OFF (obligatoire)
 			var srcTheme = ('#theme#'!='#'+'theme#') ? '#theme#': "";
 													// Thème du background s'il y a lieu (optionnel)
-			var srcPicture = (is_numeric('#picture#')) ? parseFloat('#picture#') : null;
-													// Nombre d'images à afficher (obligatoire)
-			var srcMinVal = (is_numeric('#min#')) ? parseFloat('#min#') : null;
-													// Valeur minimale de la plage de mesure à prendre en compte (obligatoire)
-			var srcMaxVal = (is_numeric('#max#')) ? parseFloat('#max#') : null;       
-													// Valeur maximale de la plage de mesure à prendre en compte (obligatoire)
 
 			var fldBkg = 'data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/fond/';
 													// Dossier des images de background
 			var srcMode = "light"					// Mode du background (dark ou light)
-			var srcIconID = "1";						// Rang de l'image à afficher
-			var srcLevelIc = 1;						// Niveau de l'image à afficher après calcul
-			var srcMinLevel = 1;					// Niveau min de l'image et du bandeau (forcément 1)
-			var srcField = srcMaxVal - srcMinVal;	// Plage totale de calcul de l'image de background, permet de traiter le cas des bornes négatives
-			var srcStepBn = srcField/8;				// Intervalle entre 2 backgrounds différents, 8 correspond au nombre d'intervalle pour 10 backgrounds
-			var srcStepIc = 1;						// Intervalle entre 2 images différentes
-			var srcMaxLevelBn = 10;					// Niveau max du bandeau - 10 bandeaux
-			var srcLevelBn = 1;						// Niveau du bandeau calculé
-			var srcStateShift = srcState - srcMinVal;
-													// State décalé en fonction du Min pour calculer l'image et le bandeau
-			var srcTxtVal = "";						// Couleur des caractères de la valeur de la commande
-			var srcValBanner = "";					// Couleur des caractère du bandeau
-			var srcMode = "light";					// Mode du background (dark ou light)
+			var srcColBanner = "";					// Couleur du bandeau
+			var srcValBanner = ""					// Texte du bandeau
 			var srcTxtBanner = "black"				// Couleur des caractères du bandeau
+			var srcMode = "light";					// Mode du background (dark ou light)
 			var srcErrorCode = "";					// Nom du paramètre en erreur s'il y a lieu
 			var	srcTemp = 0;						// Variable temporaire
 		
 			// Validation des paramètres
-			if (srcNumType != "opened" & srcNumType != "closed") {
-				srcErrorCode = "numtype";
 			} else if (fldIcon == null || fldIcon == "") {
 				srcErrorCode = "folder";
 			} else if (srcIcon == null || srcIcon == "") {
 				srcErrorCode = "icon";
-			} else if (srcPicture < 1 || srcPicture == null) {
-				srcErrorCode = "picture";
-			} else if (srcMinVal == null) {
-				srcErrorCode = "min";
-			} else if (srcMaxVal == null) {
-				srcErrorCode = "max";
-			} else if (srcMinVal >= srcMaxVal) {
-				srcErrorCode = "min >= max";
+			} else if (srcTxtBanOn == null || srcTxtBanOn == "" ) {
+				srcErrorCode = "txtbanon";
+			} else if (srcColBanOn == null || srcColBanOn == "" ) {
+				srcErrorCode = "colbanon";
+			} else if (srcTxtBanOff == null || srcTxtBanOff == "" ) {
+				srcErrorCode = "txtbanoff";
+			} else if (srcColBanOff == null || srcColBanOff == "" ) {
+				srcErrorCode = "colbanoff";
 			}
 			
+
 			if (srcErrorCode != "") {
 				srcIcon = "error";
 			} else {
 				// Initialisation du nom du dossier des images
 				fldIcon = 'data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/' + fldIcon + '/';
 
-				// Calcul en fonction du type de variable numérique "opened"-"closed" et du nombre d'images
-
-				// Initialisation du niveau du bandeau
-				srcLevelBn = Math.round(srcStateShift/srcStepBn)+1;
-
-				if (srcPicture == "1") {			// Image unique
-					srcIconID = "_1";
-					if (srcState <= srcMinVal) {
-						srcValBanner = srcMinLevel.toString();
-					}
-					else if (srcState >= srcMaxVal) {
-						srcValBanner = srcMaxLevelBn.toString();
-					}
-					else {
-						srcValBanner = srcLevelBn.toString();
-					}
+				// Initialisation de la couleur du bandeau
+				if (srcState == 0) {
+					srcColBanner = srcColBanOff;
+					srcValBanner = srcTxtBanOff; 
+				} else {
+					srcValBanner = srcColBanOn;
+					srcValBanner = srcTxtBanOn; 
 				}
-				else if (srcPicture == 2) {			// Images doubles
-					// Calcul de l'image à afficher selon la valeur médiane
-					if (srcStateShift <= srcField/2) {
-						srcIconID = "_1";
-					} else {
-						srcIconID = "_2";
-					}
-					if (srcState <= srcMinVal) {
-						srcValBanner = srcMinLevel.toString();
-					}
-					else if (srcState >= srcMaxVal) {
-						srcValBanner = srcMaxLevelBn.toString();
-					}
-					else {
-						srcValBanner = srcLevelBn.toString();
-					}
-				} else {							// Images multiples
-					// Calcul du logo à afficher
-					switch (srcNumType) {
-						case "opened":
-							srcStepIc = srcField/(srcPicture-2);
-							srcLevelIc = Math.trunc(srcStateShift/srcStepIc)+2;
-							if (srcState <= srcMinVal || srcLevelIc < srcMinLevel) {
-								srcIconID = '_' + srcMinLevel.toString();
-								srcValBanner = srcMinLevel.toString();
-							}
-							else if (srcState >= srcMaxVal || srcLevelIc > srcPicture) {
-								srcIconID = '_' + srcPicture.toString();
-								srcValBanner = srcMaxLevelBn.toString();
-							}
-							else {
-								srcIconID = '_' + srcLevelIc.toString();
-								srcValBanner = srcLevelBn.toString();
-							}
-							break;
-						case "closed":
-							srcStepIc = (srcField/srcPicture);
-							srcLevelIc = Math.round(srcStateShift/srcStepIc)+1;
-							if (srcState <= srcMinVal || srcState >= srcMaxVal){
-								srcIconID = '_' + srcMinLevel.toString();
-								srcValBanner = srcMinLevel.toString();
-							}
-							else {
-								srcIconID = '_' + srcLevelIc.toString();
-								srcValBanner = srcLevelBn.toString();
-							}
-							break;
-					}
-				}
-
-
+	
 				// Calcul de la couleur des caractères de la valeur de la commande et du bandeau
 				switch (srcValBanner) {
-					case "1":
-						srcTxtVal = "aqua";
+					case "aqua":
 						srcTxtBanner = "black"
 						break;
-					case "2":
-						srcTxtVal = "blue";
+					case "blue":
 						srcTxtBanner = "white"
 						break;
-					case "3":
-						srcTxtVal = "lime";
+					case "lime":
 						srcTxtBanner = "white"
 						break;
-					case "4":
-						srcTxtVal = "yellow";
+					case "yellow":
 						srcTxtBanner = "black"
 						break;
-					case "5":
-						srcTxtVal = "lightsalmon";
+					case "lightsalmon":
 						srcTxtBanner = "black"
 						break;
-					case "6":
-						srcTxtVal = "orange";
+					case "orange":
 						srcTxtBanner = "black"
 						break;
-					case "7":
-						srcTxtVal = "darkorange";
+					case "darkorange":
 						srcTxtBanner = "white"
 						break;
-					case "8":
-						srcTxtVal = "red";
+					case "red":
 						srcTxtBanner = "white"
 						break;
-					case "9":
-						srcTxtVal = "darkred";
+					case "darkred":
 						srcTxtBanner = "white"
 						break;
-					case "10":
-						srcTxtVal = "black";
+					case "black":
 						srcTxtBanner = "white"
 						break;
-
+					case "gray":
+						srcTxtBanner = "white"
+						break;
+					defaut:
+						srcErrorCode = "? colban ?";
+						break;
 				}
 			}
 			
@@ -189,23 +114,21 @@
 				if ($('body').attr('data-theme').endsWith('Light')) {
 					srcMode = "light";
 				} else {
-					srcMode = "dark"
+					srcMode = "dark";
 				}
 			}
 
 			if (srcErrorCode != "") {
 				// Affichage des éléments d'erreur
 				$('.background#uid#').empty().attr('src', fldBkg + 'fo_oups1.png');
-				$('.banner#uid#').empty().attr('src', fldBkg + 'fo_banner_8.png');
-				$('.cmdname#uid#,.value#id#,.unite#uid#').hide();
+				$('.banner#uid#').empty().attr('src', fldBkg + 'fo_banner_red.png');
 				$('.icon#uid#').hide();
 				$('.error#uid#').css('color','white');
 				$('.error#uid#').empty().text(srcErrorCode);
 			} else {
 				// Affichage des textes
-				$('.cmdname#uid#').css('color',srcTxtBanner);
-				$('.value#uid#,.unite#uid#').css('color',srcTxtVal);
-				$('.value#id#,.unite#uid#').empty().text(srcState + ' #unite#');
+				$('.txtban#uid#').css('color',srcTxtBanner);
+				$('.txtban#id#').empty().text(srcValBanner);
 				
 				//Affichage du background, du bandeau et du nom de la commande
 				if (srcTheme != "") {
@@ -223,7 +146,7 @@
 	</script>
 
 	<style>
-		div.cmdname#uid# {
+		div.txtban#uid# {
 			font-size:1em;
 			font-weight:bold;
 			position:absolute;
@@ -250,16 +173,6 @@
 			font-weight:bold;
 			position:absolute;
 			vertical-align:middle;
-			top:2%;
-			width:85px;
-			height:85px;
-			z-index:4;
-			letter-spacing:0px;
-		}
-		div.unite#uid# {
-			font-size:1em;
-			font-weight:bold;
-			position:absolute;
 			top:2%;
 			width:85px;
 			height:85px;
