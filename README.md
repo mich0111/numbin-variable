@@ -34,4 +34,4 @@ Voici les paramètres à prendre en compte pour l’utilisation de ce widget.
     - txtbanoff : (obligatoire), texte à faire figuré sur le bandeau pour l'état OFF.
     - theme     : (optionnel), nom du thème de fond à afficher. Les fichiers de fond devront alors s’appeler fo_bkg_nom_dark.png et fo_bkg_nom_light.png. Si le paramètre est absent ou vide, les thèmes par défaut seront affichés.
 
-Si l’un des paramètres est erronés, le widget vous indiquera celui à corriger.
+Si l’un des paramètres est erroné, le widget vous indiquera celui à corriger.
