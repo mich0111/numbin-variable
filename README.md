@@ -49,3 +49,16 @@ Résultat pour OFF:
 Résultat pour ON :
 
 ![alt tag](https://user-images.githubusercontent.com/54777712/69622997-59e09d80-1042-11ea-8a0e-a6513d857174.PNG)
+
+
+Et avec l'option onoff à yes, c'est-à-dire ces paramètres:
+
+![alt tag](https://user-images.githubusercontent.com/54777712/69667733-d9945980-108e-11ea-8d57-6c06c87b545b.PNG)
+
+Pour OFF:
+
+![alt tag](https://user-images.githubusercontent.com/54777712/69667748-def1a400-108e-11ea-84e9-a7185ab33470.PNG)
+
+Pour ON:
+
+![alt tag](https://user-images.githubusercontent.com/54777712/69667760-e153fe00-108e-11ea-836e-8519d195359a.PNG)
