@@ -3,7 +3,6 @@
  	<img class="banner#uid#"/>
 	<img class="icon#uid#" style="transform:translate(-50%,-50%);"/>
 	<div class="txtban#uid#"/>
-	<div class="error#uid#"/>
  
 	<script>
 		jeedom.cmd.update['#id#'] = function(_options) {
@@ -120,21 +119,20 @@
 				$('.background#uid#').empty().attr('src', fldBkg + 'fo_oups1.png');
 				$('.banner#uid#').empty().attr('src', fldBkg + 'fo_banner_red.png');
 				$('.icon#uid#').hide();
-				$('.error#uid#').css('color','white');
-				$('.error#uid#').empty().text(srcErrorCode);
+				$('.txtban#uid#').css('color','white');
+				$('.txtban#uid#').empty().text(srcErrorCode);
 			} else {
-				// Affichage des textes
-				$('.txtban#uid#').css('color',srcColTxtBanner);
-				$('.txtban#id#').empty().text(srcTxtBanner);
-				
 				//Affichage du background, du bandeau et du nom de la commande
 				if (srcTheme != "") {
 					srcTheme = srcTheme + '_';
-				}
-
+                }
+				// Affichage des images
 				$('.background#uid#').empty().attr("src", fldBkg + 'fo_bkg_' + srcTheme + srcMode + '.png');
 				$('.banner#uid#').empty().attr("src", fldBkg + 'fo_banner_' + srcColBanner + '.png');
 				$('.icon#uid#').empty().attr('src', fldIcon + srcIcon + '.png');
+				// Affichage des textes
+              	$('.txtban#uid#').css('color',srcColTxtBanner);
+				$('.txtban#uid#').empty().text(srcTxtBanner);
 			}
 
 			$('.cmd[data-cmd_uid=#uid#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate);
@@ -143,19 +141,8 @@
 	</script>
 
 	<style>
-	div.error#uid# {
-			font-size:1em;
-			font-weight:bold;
-			position:absolute;
-			vertical-align:middle;
-			top:82%;
-			left:0%;
-			width:85px;
-			height:85px;
-			z-index:4;
-		}		
 		div.txtban#uid# {
-			font-size:1em;
+			font-size:1.2em;
 			font-weight:bold;
 			position:absolute;
 			vertical-align:middle;
