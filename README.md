@@ -2,6 +2,7 @@
 Widget pour info numériques binaire complétement paramétrable.
 
 Il permet l’affichage d’info numérique binaire avec fond, image de l'équipement, bandeau d'état et texte du bandeau d'état paramétrables.
+En option, il est également possible d'affecter des images ON/OFF aux équipements.
 
 L’installation préalable du widget Multi-action-Defaut de @JAG est un prérequis.
 
@@ -27,14 +28,15 @@ Ce widget bascule automatiquement du thème sombre au clair et adapte le fond du
 Voici les paramètres à prendre en compte pour l’utilisation de ce widget.
 
 * folder: (obligatoire), nom du dossier de l’image (vent, eau, …).
-* icon: (obligatoire), nom de l’image.
+* icon: (obligatoire), nom de l’image en .png sans suffixe. Pour "image.png" noté "image".
 * colbanon: (obligatoire), couleur du bandeau pour l'état ON.
 * colbanoff: (obligatoire), couleur du bandeau pour l'état OFF.
 * txtbanon: (obligatoire), texte à faire figurer sur le bandeau pour l'état ON.
 * txtbanoff: (obligatoire), texte à faire figurer sur le bandeau pour l'état OFF.
+* onoff: (optionnel), si = "yes" alors les images de l'équipement auront un état on et off. Dans ce cas, les images des équipements devront s'appeler "image_on.png" et "image_off.png". En revanche, le nom de l'image passée dans icon reste "image".
 * theme: (optionnel), nom du thème de fond à afficher. Les fichiers de fond devront alors s’appeler fo_bkg_nom_dark.png et fo_bkg_nom_light.png. Si le paramètre est absent ou vide, les thèmes par défaut seront affichés.
 
-Si l’un des paramètres est erronés, le widget vous indiquera celui à corriger.
+Si l’un des paramètres est erronés, le widget vous indiquera celui à corriger, sauf si vous n'avez pas créé ou choisi les bonnes images, dans ce cas, vous verrez une image vide.
 
 Avec le paramétrage suivant:
 
