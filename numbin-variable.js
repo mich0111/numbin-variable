@@ -24,6 +24,8 @@
 													// Couleur du bandeau OFF (obligatoire)
 			var srcTheme = ('#theme#'!='#'+'theme#') ? '#theme#': "";
 													// Thème du background (optionnel)
+			var srcOnOff = ('#onoff#'!='#'+'theme#') ? '#onoff#': "";
+													// Affichage différenciée des images ON et OFF
 
 			var fldBkg = 'data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/fond/';
 													// Dossier des images de background
@@ -129,12 +131,20 @@
 				// Affichage des images
 				$('.background#uid#').empty().attr("src", fldBkg + 'fo_bkg_' + srcTheme + srcMode + '.png');
 				$('.banner#uid#').empty().attr("src", fldBkg + 'fo_banner_' + srcColBanner + '.png');
-				$('.icon#uid#').empty().attr('src', fldIcon + srcIcon + '.png');
+				if (srcOnOff == "yes") {
+					if (srcState == 0) {
+						$('.icon#uid#').empty().attr('src', fldIcon + srcIcon + '_off.png');
+					} else {
+						$('.icon#uid#').empty().attr('src', fldIcon + srcIcon + '_on.png');
+					}
+				}
+				 else {
+					$('.icon#uid#').empty().attr('src', fldIcon + srcIcon + '.png');
+				}
 				// Affichage des textes
               	$('.txtban#uid#').css('color',srcColTxtBanner);
 				$('.txtban#uid#').empty().text(srcTxtBanner);
 			}
-
 			$('.cmd[data-cmd_uid=#uid#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate);
 		}
 		jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});
