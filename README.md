@@ -35,3 +35,15 @@ Voici les paramètres à prendre en compte pour l’utilisation de ce widget.
 * theme: (optionnel), nom du thème de fond à afficher. Les fichiers de fond devront alors s’appeler fo_bkg_nom_dark.png et fo_bkg_nom_light.png. Si le paramètre est absent ou vide, les thèmes par défaut seront affichés.
 
 Si l’un des paramètres est erronés, le widget vous indiquera celui à corriger.
+
+Avec le paramétrage suivant:
+
+![alt tag](https://user-images.githubusercontent.com/54777712/69622993-58af7080-1042-11ea-9890-f7c0ff177641.PNG)
+
+Résultat pour OFF:
+
+![alt tag](https://user-images.githubusercontent.com/54777712/69622995-59480700-1042-11ea-96af-f9bb7871e809.PNG)
+
+Résultat pour ON :
+
+![alt tag](https://user-images.githubusercontent.com/54777712/69622997-59e09d80-1042-11ea-8a0e-a6513d857174.PNG)
