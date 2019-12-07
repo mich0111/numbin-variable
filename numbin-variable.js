@@ -131,7 +131,7 @@
 				// Affichage des images
 				$('.background#uid#').empty().attr("src", fldBkg + 'fo_bkg_' + srcTheme + srcMode + '.png');
 				$('.banner#uid#').empty().attr("src", fldBkg + 'fo_banner_' + srcColBanner + '.png');
-				if (srcOnOff == "yes") {
+				if (srcOnOff != "no") {
 					if (srcState == 0) {
 						$('.icon#uid#').empty().attr('src', fldIcon + srcIcon + '_off.png');
 					} else {
