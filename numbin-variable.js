@@ -165,10 +165,10 @@
 		img.icon#uid# {
 			position:absolute;
 			margin:0;
-			top:47%;
-			left:52%;
-			max-height:50px;
-			max-width:50px;
+			top:32px;
+			left:51%;
+			height:50px;
+			width:50px;
 			z-index:2;
 		}
 		img.banner#uid# {
