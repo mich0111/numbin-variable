@@ -18,19 +18,28 @@
 													// Texte du bandeau ON (obligatoire)
 			var srcTxtBanOff = ('#txtbanoff#'!='#'+'txtbanoff#') ? '#txtbanoff#': "";
 													// Texte du bandeau OFF (obligatoire)
+			var srcColTxtBanOn = ('#coltxtbanon#'!='#'+'coltxtbanon#') ? '#coltxtbanon#': "";
+													// Texte du bandeau ON (obligatoire)
+			var srcColTxtBanOff = ('#coltxtbanoff#'!='#'+'coltxtbanoff#') ? '#coltxtbanoff#': "";
+													// Texte du bandeau OFF (obligatoire)
 			var srcColBanOn = ('#colbanon#'!='#'+'colbanon#') ? '#colbanon#': "";
 													// Couleur du bandeau ON (obligatoire)
 			var srcColBanOff = ('#colbanoff#'!='#'+'colbanoff#') ? '#colbanoff#': "";
 													// Couleur du bandeau OFF (obligatoire)
 			var srcTheme = ('#theme#'!='#'+'theme#') ? '#theme#': "";
 													// Thème du background (optionnel)
-			var srcOnOff = ('#onoff#'!='#'+'theme#') ? '#onoff#': "";
+			var srcOnOff = ('#onoff#'!='#'+'onoff#') ? '#onoff#': "";
 													// Affichage différenciée des images ON et OFF
+			var srcBlinkOff = ('#blinkoff#'!='#'+'blinkoff#') ? '#blinkoff#': "";
+													// Clignotement du bandeau si OFF
+			var srcBlinkOn = ('#blinkon#'!='#'+'blinkon#') ? '#blinkon#': "";
+													// Clignotement du bandeau si ON
+			var srcBlink = false;					// Booléen de clignotement
 
 			var fldBkg = 'data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/fond/';
 													// Dossier des images de background
 			var srcMode = "light";					// Mode du background (dark ou light)
-			var srcColBanner = "";					// Couleur du bandeau
+			var srcColBanner = "black";					// Couleur du bandeau
 			var srcTxtBanner = "";					// Texte du bandeau
 			var srcColTxtBanner = "black";			// Couleur des caractères du bandeau
 			var srcMode = "light";					// Mode du background (dark ou light)
@@ -51,62 +60,6 @@
 				srcErrorCode = "colbanoff";
 			}
 			
-			if (srcErrorCode != "") {
-				srcIcon = "error";
-			} else {
-				// Initialisation du nom du dossier des images
-				fldIcon = 'data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/' + fldIcon + '/';
-
-				// Initialisation de la couleur du bandeau
-				if (srcState == 0) {
-					srcColBanner = srcColBanOff;
-					srcTxtBanner = srcTxtBanOff; 
-				} else {
-					srcColBanner = srcColBanOn;
-					srcTxtBanner = srcTxtBanOn; 
-				}
-
-				// Calcul de la couleur des caractères de la valeur de la commande et du bandeau
-				switch (srcColBanner) {
-					case "aqua":
-						srcColTxtBanner = "black";
-						break;
-					case "blue":
-						srcColTxtBanner = "white";
-						break;
-					case "lime":
-						srcColTxtBanner = "white";
-						break;
-					case "yellow":
-						srcColTxtBanner = "black";
-						break;
-					case "lightsalmon":
-						srcColTxtBanner = "black";
-						break;
-					case "orange":
-						srcColTxtBanner = "black";
-						break;
-					case "darkorange":
-						srcColTxtBanner = "white";
-						break;
-					case "red":
-						srcColTxtBanner = "white";
-						break;
-					case "darkred":
-						srcColTxtBanner = "white";
-						break;
-					case "black":
-						srcColTxtBanner = "white";
-						break;
-					case "gray":
-						srcColTxtBanner = "white";
-						break;
-					defaut:
-						srcErrorCode = "?colban?";
-						break;
-				}
-			}
-			
 			// Sélection du mode clair ou sombre
 			if ($('body')[0].hasAttribute('data-theme')) {
 				if ($('body').attr('data-theme').endsWith('Light')) {
@@ -117,20 +70,62 @@
 			}
 
 			if (srcErrorCode != "") {
+				// Changement de l'icone pour erreur
+				srcIcon = "error";
+
 				// Affichage des éléments d'erreur
 				$('.background#uid#').empty().attr('src', fldBkg + 'fo_oups1.png');
-				$('.banner#uid#').empty().attr('src', fldBkg + 'fo_banner_red.png');
+				$('.banner#uid#').css('background-color','red');
 				$('.icon#uid#').hide();
 				$('.txtban#uid#').css('color','white');
 				$('.txtban#uid#').empty().text(srcErrorCode);
 			} else {
+				// Initialisation du nom du dossier des images
+				fldIcon = 'data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/' + fldIcon + '/';
+
+				// Initialisation de la couleur du bandeau et des caractères de la valeur
+				if (srcState == 0) {
+					srcColBanner = srcColBanOff;
+					srcTxtBanner = srcTxtBanOff;
+					if (srcColTxtBanOff != "" && srcColTxtBanOff != null) {
+						srcColTxtBanner = srcColTxtBanOff;
+					}
+					if (srcBlinkOff == 'yes') {
+						srcBlink = true;
+					}
+				} else {
+					srcColBanner = srcColBanOn;
+					srcTxtBanner = srcTxtBanOn;
+					if (srcColTxtBanOn != "" && srcColTxtBanOn != null) {
+						srcColTxtBanner = srcColTxtBanOn;
+					}
+					if (srcBlinkOn == 'yes') {
+						srcBlink = true;
+					}
+				}
+
 				//Affichage du background, du bandeau et du nom de la commande
 				if (srcTheme != "") {
 					srcTheme = srcTheme + '_';
                 }
-				// Affichage des images
+				// Affichage du fond
 				$('.background#uid#').empty().attr("src", fldBkg + 'fo_bkg_' + srcTheme + srcMode + '.png');
-				$('.banner#uid#').empty().attr("src", fldBkg + 'fo_banner_' + srcColBanner + '.png');
+
+				// Affichage du bandeau et de ses options
+				$('.banner#uid#').css('background-color',srcColBanner);
+				if (srcBlink) {					// Clignotement
+					$('.banner#uid#').addClass('blinking');
+				}
+				else {
+					$('.banner#uid#').removeClass('blinking');
+				}
+				$('.banner#uid#').empty().attr("src", fldBkg + 'fo_banner.png');
+
+				// Affichage du texte du bandeau
+				$('.txtban#uid#').css('color',srcColTxtBanner);
+				$('.txtban#uid#').empty().text(srcTxtBanner);
+
+				// Affichage de l'icone et de ses options
 				if (srcOnOff != "no") {
 					if (srcState == 0) {
 						$('.icon#uid#').empty().attr('src', fldIcon + srcIcon + '_off.png');
@@ -141,9 +136,7 @@
 				 else {
 					$('.icon#uid#').empty().attr('src', fldIcon + srcIcon + '.png');
 				}
-				// Affichage des textes
-              	$('.txtban#uid#').css('color',srcColTxtBanner);
-				$('.txtban#uid#').empty().text(srcTxtBanner);
+
 			}
 			$('.cmd[data-cmd_uid=#uid#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate);
 		}
@@ -173,10 +166,10 @@
 		}
 		img.banner#uid# {
 			position:absolute;
-			top:0%;
+			bottom:0%;
 			left:0%;
 			width:80px;
-			height:80px;
+			height:16px;
 			z-index:2;
 		}
 		img.background#uid# {
@@ -187,5 +180,10 @@
 			height:80px;
 			z-index:1;
 		}
+		@keyframes blinking {
+			20% {opacity:0;}
+			100% {opacity:1;}
+		}
+		.blinking {animation:blinking infinite 1s;}
 	</style>
 </div>
