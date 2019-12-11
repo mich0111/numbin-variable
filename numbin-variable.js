@@ -28,8 +28,13 @@
 													// Couleur du bandeau OFF (obligatoire)
 			var srcTheme = ('#theme#'!='#'+'theme#') ? '#theme#': "";
 													// Thème du background (optionnel)
-			var srcOnOff = ('#onoff#'!='#'+'theme#') ? '#onoff#': "";
+			var srcOnOff = ('#onoff#'!='#'+'onoff#') ? '#onoff#': "";
 													// Affichage différenciée des images ON et OFF
+			var srcBlinkOff = ('#blinkoff#'!='#'+'blinkoff#') ? '#blinkoff#': "";
+													// Clignotement du bandeau si OFF
+			var srcBlinkOn = ('#blinkon#'!='#'+'blinkon#') ? '#blinkon#': "";
+													// Clignotement du bandeau si ON
+			var srcBlink = false;					// Booléen de clignotement
 
 			var fldBkg = 'data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/fond/';
 													// Dossier des images de background
@@ -81,9 +86,12 @@
 				// Initialisation de la couleur du bandeau et des caractères de la valeur
 				if (srcState == 0) {
 					srcColBanner = srcColBanOff;
-				  srcTxtBanner = srcTxtBanOff;
-				  if (srcColTxtBanOff != "" && srcColTxtBanOff != null) {
-					  srcColTxtBanner = srcColTxtBanOff;
+					srcTxtBanner = srcTxtBanOff;
+					if (srcColTxtBanOff != "" && srcColTxtBanOff != null) {
+						srcColTxtBanner = srcColTxtBanOff;
+					}
+					if (srcBlinkOff == 'yes') {
+						srcBlink = true;
 					}
 				} else {
 					srcColBanner = srcColBanOn;
@@ -91,16 +99,33 @@
 					if (srcColTxtBanOn != "" && srcColTxtBanOn != null) {
 						srcColTxtBanner = srcColTxtBanOn;
 					}
+					if (srcBlinkOn == 'yes') {
+						srcBlink = true;
+					}
 				}
 
 				//Affichage du background, du bandeau et du nom de la commande
 				if (srcTheme != "") {
 					srcTheme = srcTheme + '_';
                 }
-				// Affichage des images
+				// Affichage du fond
 				$('.background#uid#').empty().attr("src", fldBkg + 'fo_bkg_' + srcTheme + srcMode + '.png');
+
+				// Affichage du bandeau et de ses options
 				$('.banner#uid#').css('background-color',srcColBanner);
+				if (srcBlink) {					// Clignotement
+					$('.banner#uid#').addClass('blinking');
+				}
+				else {
+					$('.banner#uid#').removeClass('blinking');
+				}
 				$('.banner#uid#').empty().attr("src", fldBkg + 'fo_banner.png');
+
+				// Affichage du texte du bandeau
+				$('.txtban#uid#').css('color',srcColTxtBanner);
+				$('.txtban#uid#').empty().text(srcTxtBanner);
+
+				// Affichage de l'icone et de ses options
 				if (srcOnOff != "no") {
 					if (srcState == 0) {
 						$('.icon#uid#').empty().attr('src', fldIcon + srcIcon + '_off.png');
@@ -111,9 +136,7 @@
 				 else {
 					$('.icon#uid#').empty().attr('src', fldIcon + srcIcon + '.png');
 				}
-				// Affichage des textes
-              	$('.txtban#uid#').css('color',srcColTxtBanner);
-				$('.txtban#uid#').empty().text(srcTxtBanner);
+
 			}
 			$('.cmd[data-cmd_uid=#uid#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate);
 		}
@@ -157,5 +180,10 @@
 			height:80px;
 			z-index:1;
 		}
+		@keyframes blinking {
+			20% {opacity:0;}
+			100% {opacity:1;}
+		}
+		.blinking {animation:blinking infinite 1s;}
 	</style>
 </div>
