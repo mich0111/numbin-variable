@@ -18,6 +18,10 @@
 													// Texte du bandeau ON (obligatoire)
 			var srcTxtBanOff = ('#txtbanoff#'!='#'+'txtbanoff#') ? '#txtbanoff#': "";
 													// Texte du bandeau OFF (obligatoire)
+			var srcColTxtBanOn = ('#coltxtbanon#'!='#'+'coltxtbanon#') ? '#coltxtbanon#': "";
+													// Texte du bandeau ON (obligatoire)
+			var srcColTxtBanOff = ('#coltxtbanoff#'!='#'+'coltxtbanoff#') ? '#coltxtbanoff#': "";
+													// Texte du bandeau OFF (obligatoire)
 			var srcColBanOn = ('#colbanon#'!='#'+'colbanon#') ? '#colbanon#': "";
 													// Couleur du bandeau ON (obligatoire)
 			var srcColBanOff = ('#colbanoff#'!='#'+'colbanoff#') ? '#colbanoff#': "";
@@ -30,7 +34,7 @@
 			var fldBkg = 'data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/fond/';
 													// Dossier des images de background
 			var srcMode = "light";					// Mode du background (dark ou light)
-			var srcColBanner = "";					// Couleur du bandeau
+			var srcColBanner = "black";					// Couleur du bandeau
 			var srcTxtBanner = "";					// Texte du bandeau
 			var srcColTxtBanner = "black";			// Couleur des caractères du bandeau
 			var srcMode = "light";					// Mode du background (dark ou light)
@@ -57,56 +61,22 @@
 				// Initialisation du nom du dossier des images
 				fldIcon = 'data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/' + fldIcon + '/';
 
-				// Initialisation de la couleur du bandeau
+				// Initialisation de la couleur du bandeau et des caractères de la valeur
 				if (srcState == 0) {
-					srcColBanner = srcColBanOff;
-					srcTxtBanner = srcTxtBanOff; 
+                  	srcColBanner = srcColBanOff;
+					srcTxtBanner = srcTxtBanOff;
+					if (srcColTxtBanOff != "" && srcColTxtBanOff != null) {
+						srcColTxtBanner = srcColTxtBanOff;
+					}
 				} else {
 					srcColBanner = srcColBanOn;
-					srcTxtBanner = srcTxtBanOn; 
-				}
-
-				// Calcul de la couleur des caractères de la valeur de la commande et du bandeau
-				switch (srcColBanner) {
-					case "aqua":
-						srcColTxtBanner = "black";
-						break;
-					case "blue":
-						srcColTxtBanner = "white";
-						break;
-					case "lime":
-						srcColTxtBanner = "white";
-						break;
-					case "yellow":
-						srcColTxtBanner = "black";
-						break;
-					case "lightsalmon":
-						srcColTxtBanner = "black";
-						break;
-					case "orange":
-						srcColTxtBanner = "black";
-						break;
-					case "darkorange":
-						srcColTxtBanner = "white";
-						break;
-					case "red":
-						srcColTxtBanner = "white";
-						break;
-					case "darkred":
-						srcColTxtBanner = "white";
-						break;
-					case "black":
-						srcColTxtBanner = "white";
-						break;
-					case "gray":
-						srcColTxtBanner = "white";
-						break;
-					defaut:
-						srcErrorCode = "?colban?";
-						break;
+					srcTxtBanner = srcTxtBanOn;
+					if (srcColTxtBanOn != "" && srcColTxtBanOn != null) {
+						srcColTxtBanner = srcColTxtBanOn;
+					}
 				}
 			}
-			
+
 			// Sélection du mode clair ou sombre
 			if ($('body')[0].hasAttribute('data-theme')) {
 				if ($('body').attr('data-theme').endsWith('Light')) {
@@ -119,7 +89,7 @@
 			if (srcErrorCode != "") {
 				// Affichage des éléments d'erreur
 				$('.background#uid#').empty().attr('src', fldBkg + 'fo_oups1.png');
-				$('.banner#uid#').empty().attr('src', fldBkg + 'fo_banner_red.png');
+				$('.banner#uid#').css('background-color','red');
 				$('.icon#uid#').hide();
 				$('.txtban#uid#').css('color','white');
 				$('.txtban#uid#').empty().text(srcErrorCode);
@@ -130,7 +100,8 @@
                 }
 				// Affichage des images
 				$('.background#uid#').empty().attr("src", fldBkg + 'fo_bkg_' + srcTheme + srcMode + '.png');
-				$('.banner#uid#').empty().attr("src", fldBkg + 'fo_banner_' + srcColBanner + '.png');
+				$('.banner#uid#').css('background-color',srcColBanner);
+				$('.banner#uid#').empty().attr("src", fldBkg + 'fo_banner.png');
 				if (srcOnOff != "no") {
 					if (srcState == 0) {
 						$('.icon#uid#').empty().attr('src', fldIcon + srcIcon + '_off.png');
@@ -173,10 +144,10 @@
 		}
 		img.banner#uid# {
 			position:absolute;
-			top:0%;
+			bottom:0%;
 			left:0%;
 			width:80px;
-			height:80px;
+			height:16px;
 			z-index:2;
 		}
 		img.background#uid# {
