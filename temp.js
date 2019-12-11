@@ -28,8 +28,13 @@
 													// Couleur du bandeau OFF (obligatoire)
 			var srcTheme = ('#theme#'!='#'+'theme#') ? '#theme#': "";
 													// Thème du background (optionnel)
-			var srcOnOff = ('#onoff#'!='#'+'theme#') ? '#onoff#': "";
+			var srcOnOff = ('#onoff#'!='#'+'onoff#') ? '#onoff#': "";
 													// Affichage différenciée des images ON et OFF
+			var srcBlinkOn = ('#blinkon#'!='#'+'blinkon#') ? '#blinkon#': "";
+													// Clignotement du bandeau sur valeur ON
+			var srcBlinkOff = ('#blinkoff#'!='#'+'blinkoff#') ? '#blinkoff#': "";
+													// Clignotement du bandeau sur valeur OFF
+			var srcBlink = false					// Variable de clignotement
 
 			var fldBkg = 'data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/fond/';
 													// Dossier des images de background
@@ -65,9 +70,8 @@
 			}
 
 			if (srcErrorCode != "") {
-				// Changement de l'icone pour erreur
+				// Changement d'icone pour erreur
 				srcIcon = "error";
-
 				// Affichage des éléments d'erreur
 				$('.background#uid#').empty().attr('src', fldBkg + 'fo_oups1.png');
 				$('.banner#uid#').css('background-color','red');
@@ -80,16 +84,22 @@
 
 				// Initialisation de la couleur du bandeau et des caractères de la valeur
 				if (srcState == 0) {
-					srcColBanner = srcColBanOff;
-				  srcTxtBanner = srcTxtBanOff;
-				  if (srcColTxtBanOff != "" && srcColTxtBanOff != null) {
-					  srcColTxtBanner = srcColTxtBanOff;
+                  	srcColBanner = srcColBanOff;
+					srcTxtBanner = srcTxtBanOff;
+					if (srcColTxtBanOff != "" && srcColTxtBanOff != null) {
+						srcColTxtBanner = srcColTxtBanOff;
+					}
+					if (srcBlinkOff == 'yes') {
+						srcBlink = true;
 					}
 				} else {
 					srcColBanner = srcColBanOn;
 					srcTxtBanner = srcTxtBanOn;
 					if (srcColTxtBanOn != "" && srcColTxtBanOn != null) {
 						srcColTxtBanner = srcColTxtBanOn;
+					}
+					if (srcBlinkOn == 'yes') {
+						srcBlink = true;
 					}
 				}
 
@@ -101,6 +111,13 @@
 				$('.background#uid#').empty().attr("src", fldBkg + 'fo_bkg_' + srcTheme + srcMode + '.png');
 				$('.banner#uid#').css('background-color',srcColBanner);
 				$('.banner#uid#').empty().attr("src", fldBkg + 'fo_banner.png');
+
+				// Faire clignoter si demandé
+				if (srcBlink) {
+					$('.banner#uid#') {animation:cligno infinite 1s;}
+				}
+
+				// Chargement de l'icone
 				if (srcOnOff != "no") {
 					if (srcState == 0) {
 						$('.icon#uid#').empty().attr('src', fldIcon + srcIcon + '_off.png');
@@ -111,11 +128,13 @@
 				 else {
 					$('.icon#uid#').empty().attr('src', fldIcon + srcIcon + '.png');
 				}
+
 				// Affichage des textes
               	$('.txtban#uid#').css('color',srcColTxtBanner);
 				$('.txtban#uid#').empty().text(srcTxtBanner);
 			}
-			$('.cmd[data-cmd_uid=#uid#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate);
+		}
+		$('.cmd[data-cmd_uid=#uid#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate);
 		}
 		jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});
 	</script>
@@ -156,6 +175,10 @@
 			width:80px;
 			height:80px;
 			z-index:1;
+		}
+		@keyframes cligno {
+			0% {opacity:0;}
+			100% {opacity:1;}
 		}
 	</style>
 </div>
