@@ -21,9 +21,9 @@ Voici les paramètres à prendre en compte pour l’utilisation de ce widget.
 * colbanoff: (obligatoire), couleur du bandeau pour l'état OFF.
 * txtbanon: (obligatoire), texte à faire figurer sur le bandeau pour l'état ON.
 * txtbanoff: (obligatoire), texte à faire figurer sur le bandeau pour l'état OFF.
-* onoff: (optionnel), si = "yes" alors les images de l'équipement auront un état ON et OFF. Dans ce cas, les images des équipements devront s'appeler "image_on.png" et "image_off.png". En revanche, le nom de l'image passée dans icon reste "image".
-* blinkon: (optionnel) , si = "yes" alors le bandeau de bas vignette clignote si ON.
-* blinkoff: (optionnel) , si = "yes" alors le bandeau de bas vignette clignote si OFF.
+* onoff: (optionnel), si != "no" alors les images de l'équipement auront un état ON et OFF. Dans ce cas, les images des équipements devront s'appeler "image_on.png" et "image_off.png". En revanche, le nom de l'image passée dans icon reste "image".
+* blinkon: (optionnel) , si = "yes" alors le bandeau de bas de vignette clignote si ON.
+* blinkoff: (optionnel) , si = "yes" alors le bandeau de bas de vignette clignote si OFF.
 * theme: (optionnel), nom du thème de fond à afficher. Les fichiers de fond devront alors s’appeler fo_bkg_nom_dark.png et fo_bkg_nom_light.png. Si le paramètre est absent ou vide, les thèmes par défaut seront affichés.
 
 Si l’un des paramètres obligatoires est erroné, le widget vous indiquera celui à corriger, sauf si vous n'avez pas créé ou choisi les bonnes images, dans ce cas, vous verrez une image vide.
