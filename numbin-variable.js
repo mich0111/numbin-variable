@@ -34,14 +34,15 @@
 													// Clignotement du bandeau si OFF
 			var srcBlinkOn = ('#blinkon#'!='#'+'blinkon#') ? '#blinkon#': "";
 													// Clignotement du bandeau si ON
-			var srcBlink = false;					// Booléen de clignotement
 
+			// Initialisation des variables
 			var fldBkg = 'data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/fond/';
 													// Dossier des images de background
 			var srcMode = "light";					// Mode du background (dark ou light)
-			var srcColBanner = "black";					// Couleur du bandeau
-			var srcTxtBanner = "";					// Texte du bandeau
+			var srcColBanner = "lime";				// Couleur du bandeau
+			var srcTxtBanner = "ON";				// Texte du bandeau
 			var srcColTxtBanner = "black";			// Couleur des caractères du bandeau
+			var srcBlink = false;					// Booléen de clignotement
 			var srcMode = "light";					// Mode du background (dark ou light)
 			var srcErrorCode = "";					// Nom du paramètre en erreur s'il y a lieu
 		
@@ -50,14 +51,6 @@
 				srcErrorCode = "folder";
 			} else if (srcIcon == null || srcIcon == "") {
 				srcErrorCode = "icon";
-			} else if (srcTxtBanOn == null || srcTxtBanOn == "") {
-				srcErrorCode = "txtbanon";
-			} else if (srcColBanOn == null || srcColBanOn == "") {
-				srcErrorCode = "colbanon";
-			} else if (srcTxtBanOff == null || srcTxtBanOff == "") {
-				srcErrorCode = "txtbanoff";
-			} else if (srcColBanOff == null || srcColBanOff == "") {
-				srcErrorCode = "colbanoff";
 			}
 			
 			// Sélection du mode clair ou sombre
@@ -85,8 +78,16 @@
 
 				// Initialisation de la couleur du bandeau et des caractères de la valeur
 				if (srcState == 0) {
-					srcColBanner = srcColBanOff;
-					srcTxtBanner = srcTxtBanOff;
+					if (srcTxtBanOff != "" && srcTxtBanOff != null) {
+						srcTxtBanner = srcTxtBanOff;
+					} else {
+						srcTxtBanner = "OFF";
+					}
+					if (srcColBanOff != "" && srcColBanOff != null) {
+						srcColBanner = srcColBanOff;
+					} else {
+						srcColBanner = "red";
+					}
 					if (srcColTxtBanOff != "" && srcColTxtBanOff != null) {
 						srcColTxtBanner = srcColTxtBanOff;
 					}
@@ -94,8 +95,12 @@
 						srcBlink = true;
 					}
 				} else {
-					srcColBanner = srcColBanOn;
-					srcTxtBanner = srcTxtBanOn;
+					if (srcTxtBanOn != "" && srcTxtBanOn != null) {
+						srcTxtBanner = srcTxtBanOn;
+					}
+					if (srcColBanOn != "" && srcColBanOn != null) {
+						srcColBanner = srcColBanOn;
+					}
 					if (srcColTxtBanOn != "" && srcColTxtBanOn != null) {
 						srcColTxtBanner = srcColTxtBanOn;
 					}

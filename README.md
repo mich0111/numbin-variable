@@ -17,16 +17,16 @@ Voici les paramètres à prendre en compte pour l’utilisation de ce widget.
 
 * folder: (obligatoire), nom du dossier de l’image (vent, eau, …).
 * icon: (obligatoire), nom de l’image en .png sans suffixe. Pour "image.png" noter "image".
-* colbanon: (obligatoire), couleur du bandeau pour l'état ON.
-* colbanoff: (obligatoire), couleur du bandeau pour l'état OFF.
-* txtbanon: (obligatoire), texte à faire figurer sur le bandeau pour l'état ON.
-* txtbanoff: (obligatoire), texte à faire figurer sur le bandeau pour l'état OFF.
-* coltxtbanon: (optionnel), couleur du texte du bandeau pour l'état ON, si absent, black.
-* coltxtbanoff: (optionnel), couleur du texte du bandeau pour l'état OFF, si absent, black.
-* onoff: (optionnel), si != "no" alors les images de l'équipement auront un état ON et OFF. Dans ce cas, les images des équipements devront s'appeler "image_on.png" et "image_off.png". En revanche, le nom de l'image passée dans icon reste "image".
-* blinkon: (optionnel) , si = "yes" alors le bandeau de bas de vignette clignote si ON.
-* blinkoff: (optionnel) , si = "yes" alors le bandeau de bas de vignette clignote si OFF.
-* theme: (optionnel), nom du thème de fond à afficher. Les fichiers de fond devront alors s’appeler fo_bkg_nom_dark.png et fo_bkg_nom_light.png. Si le paramètre est absent ou vide, les thèmes par défaut seront affichés.
+* colbanon: (optionnel) - Défaut "lime" - Couleur du bandeau pour l'état ON
+* colbanoff: (optionnel) - Défaut "red" - Couleur du bandeau pour l'état OFF.
+* txtbanon: (optionnel) - Défaut "ON" - Texte du bandeau pour l'état ON.
+* txtbanoff: (optionnel) - Défaut "OFF" - Texte du bandeau pour l'état OFF.
+* coltxtbanon: (optionnel) - Défaut "black" - Texte du bandeau pour l'état ON.
+* coltxtbanoff: (optionnel) - Défaut "black" - Texte du bandeau pour l'état OFF.
+* onoff: (optionnel) - Défaut "yes" - Indique si l'état différencie l'affichage d'équipements. Si oui, les images s'appelleront "image_on.png/image_off.png", le nom passé dans icon restant "image".
+* blinkon: (optionnel) - Défaut "no" - Permet au bandeau de bas de vignette clignote pour l'état ON.
+* blinkoff: (optionnel) - Défaut "no" - Permet au bandeau de bas de vignette clignote pour l'état OFF.
+* theme: (optionnel) - Défaut "thème standard" - Nom du thème de fond à afficher. Les fichiers de fond devront alors s’appeler fo_bkg_nom_dark.png et fo_bkg_nom_light.png.
 
 Si l’un des paramètres obligatoires est erroné, le widget vous indiquera celui à corriger, sauf si vous n'avez pas créé ou choisi les bonnes images, dans ce cas, vous verrez une image vide.
 
