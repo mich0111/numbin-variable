@@ -2,11 +2,11 @@
 Widget pour info numériques binaire complétement paramétrable.
 
 Il permet l’affichage d’info numérique binaire avec fond, image d'équipement, bandeau d'état et texte du bandeau d'état paramétrables.
-En option, il est également possible d'affecter des images ON/OFF aux équipements, de faire clignoter les bandeaux d'état fin de souligner un état remarquable et de choisir l'image de fond de la vignette.
+En option, il est également possible d'affecter des images ON/OFF aux équipements, de choisir les couleurs d'état des bandeaux, leur texte et la couleur de celui-ci, de faire clignoter les bandeaux afin de souligner un état remarquable et de choisir l'image de fond de la vignette.
 
 L’installation préalable du widget Multi-action-Defaut de @JAG est un prérequis.
 
-Vous devez indiquer les couleurs de bandeau d'état de bas de vignette en utilisant les codes couleurs standard HTML. Soit sous la forme "#xxxxxx", soit sous la forme "red" (par exemple pour rouge).
+Les couleurs de bandeau d'état de bas de vignette se déteminent en utilisant les codes couleurs standard HTML, soit sous la forme "#xxxxxx", soit sous la forme "red" (par exemple pour rouge).
 
 Les images de fond, standards ou optionnels, doivent se trouver dans le répertoire “data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/fond”. Les images superposées doivent se trouver dans le répertoire “data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/” auquel il convient d’ajouter le nom du dossier spécifique de l'équipement. 
 Si les images requises ne s’y trouvent pas, vous devrez les transférer par Jeexplorer.
