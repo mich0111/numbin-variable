@@ -30,18 +30,10 @@ Voici les paramètres à prendre en compte pour l’utilisation de ce widget.
 
 Si l’un des paramètres obligatoires est erroné, le widget vous indiquera celui à corriger, sauf si vous n'avez pas créé ou choisi les bonnes images, dans ce cas, vous verrez une image vide.
 
-Avec le paramétrage suivant, c'est-à-dire onoff à no:
+Avec ces paramètres:
 
-![Capture2](https://user-images.githubusercontent.com/54777712/70377268-e3318300-1912-11ea-8d54-2fff2c1646a0.PNG)
-
-Voici le résultat:
-
-![Capture3](https://user-images.githubusercontent.com/54777712/70377269-e3ca1980-1912-11ea-941b-fc534bb43ec6.PNG)
-
-Et avec l'option onoff non initialisée, c'est-à-dire ces paramètres:
-
-![Capture1](https://user-images.githubusercontent.com/54777712/70377267-e3318300-1912-11ea-9c16-0c5bff37f20e.PNG)
+![Capture](https://user-images.githubusercontent.com/54777712/70778895-a2f35a00-1d83-11ea-95e2-296612c416bc.PNG)
 
 Voici le résultat:
 
-![Capture](https://user-images.githubusercontent.com/54777712/70377266-e3318300-1912-11ea-82f8-2d4f2404f50d.PNG)
+![numbin](https://user-images.githubusercontent.com/54777712/70778921-af77b280-1d83-11ea-8a6b-37bb85068291.gif)
