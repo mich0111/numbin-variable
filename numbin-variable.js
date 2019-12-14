@@ -15,25 +15,25 @@
 			var srcIcon = ('#icon#'!='#'+'icon#') ? '#icon#' : "";
 													// Image à superposer (obligatoire)
 			var srcTxtBanOn = ('#txtbanon#'!='#'+'txtbanon#') ? '#txtbanon#': "";
-													// Texte du bandeau ON (obligatoire)
+													// Texte du bandeau ON (optionnel)
 			var srcTxtBanOff = ('#txtbanoff#'!='#'+'txtbanoff#') ? '#txtbanoff#': "";
 													// Texte du bandeau OFF (obligatoire)
 			var srcColTxtBanOn = ('#coltxtbanon#'!='#'+'coltxtbanon#') ? '#coltxtbanon#': "";
-													// Texte du bandeau ON (obligatoire)
+													// Texte du bandeau ON (optionnel)
 			var srcColTxtBanOff = ('#coltxtbanoff#'!='#'+'coltxtbanoff#') ? '#coltxtbanoff#': "";
-													// Texte du bandeau OFF (obligatoire)
+													// Texte du bandeau OFF (optionnel)
 			var srcColBanOn = ('#colbanon#'!='#'+'colbanon#') ? '#colbanon#': "";
-													// Couleur du bandeau ON (obligatoire)
+													// Couleur du bandeau ON (optionnel)
 			var srcColBanOff = ('#colbanoff#'!='#'+'colbanoff#') ? '#colbanoff#': "";
-													// Couleur du bandeau OFF (obligatoire)
+													// Couleur du bandeau OFF (optionnel)
 			var srcTheme = ('#theme#'!='#'+'theme#') ? '#theme#': "";
 													// Thème du background (optionnel)
 			var srcOnOff = ('#onoff#'!='#'+'onoff#') ? '#onoff#': "";
-													// Affichage différenciée des images ON et OFF
+													// Affichage différenciée des images ON et OFF (optionnel)
 			var srcBlinkOff = ('#blinkoff#'!='#'+'blinkoff#') ? '#blinkoff#': "";
-													// Clignotement du bandeau si OFF
+													// Clignotement du bandeau si OFF (optionnel)
 			var srcBlinkOn = ('#blinkon#'!='#'+'blinkon#') ? '#blinkon#': "";
-													// Clignotement du bandeau si ON
+													// Clignotement du bandeau si ON (optionnel)
 
 			// Initialisation des variables
 			var fldBkg = 'data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/fond/';
@@ -52,19 +52,9 @@
 				srcErrorCode = "icon";
 			}
 			
-			// Sélection du mode clair ou sombre
-			if ($('body')[0].hasAttribute('data-theme')) {
-				if ($('body').attr('data-theme').endsWith('Light')) {
-					srcMode = "light";
-				} else {
-					srcMode = "dark";
-				}
-			}
-
 			if (srcErrorCode != "") {
 				// Changement de l'icone pour erreur
 				srcIcon = "error";
-
 				// Affichage des éléments d'erreur
 				$('.background#uid#').empty().attr('src', fldBkg + 'fo_oups1.png');
 				$('.banner#uid#').css('background-color','red');
@@ -72,6 +62,15 @@
 				$('.txtban#uid#').css('color','white');
 				$('.txtban#uid#').empty().text(srcErrorCode);
 			} else {
+				// Sélection du mode clair ou sombre
+				if ($('body')[0].hasAttribute('data-theme')) {
+					if ($('body').attr('data-theme').endsWith('Light')) {
+						srcMode = "light";
+					} else {
+						srcMode = "dark";
+					}
+				}
+
 				// Initialisation du nom du dossier des images
 				fldIcon = 'data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/' + fldIcon + '/';
 
