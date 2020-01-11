@@ -128,7 +128,6 @@
 			top:82%;
 			left:0%;
 			width:80px;
-			height:80px;
 			z-index:4;
 		}
 		img.icon#uid# {
@@ -146,7 +145,6 @@
 			bottom:0%;
 			left:0%;
 			width:80px;
-			height:16px;
 			z-index:2;
 		}
 		img.background#uid# {
